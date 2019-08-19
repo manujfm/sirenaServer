@@ -2,7 +2,8 @@
 let jwtSecret = require("../jwt.json");
 const jwt = require('jsonwebtoken');
 
-function verify(req){ 
+function verify(req){
+    console.log(req.headers)
     let bearer = req.headers.authorization;
     if ( !bearer ) return {ok: false, error:"NOTOKEN"};
     let token = bearer.split(" ")[1];
@@ -22,7 +23,7 @@ let AuthenticationManager = () => {};
 AuthenticationManager.verifyToken = (req, res) => {
     let VERIFY_RESPONSE = verify(req);
     res.send(VERIFY_RESPONSE)
-}
+};
 
 AuthenticationManager.authenticateMiddleware = (req, res, next) => {    
     let response = verify(req);
@@ -31,7 +32,7 @@ AuthenticationManager.authenticateMiddleware = (req, res, next) => {
         return 
     }
     next()
-}
+};
 
 
 module.exports = AuthenticationManager;

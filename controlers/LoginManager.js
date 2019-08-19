@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const getUser = async function ( user ){
-	let data = User.find({username:user});
-	return  data.exec()
+	let data = User.find({username: user});
+	return data.exec()
 };
 
 const createUser = async function ( userInfo ){
@@ -18,13 +18,13 @@ let loginManager = () => {};
 
 
 loginManager.login = async (req, res, next) => {
-	let user = await getUser(req.body.user);
+	let user = await getUser(req.body.username);
 	if ( user && user.length > 0 ){
 		user = user[0];
 		let resBcryp = await bcrypt.compare(req.body.password, user.password);
 		if ( resBcryp ){
 			let token = jwt.sign({user: req.body.user}, jwtSecret.secret, { expiresIn: jwtSecret.expires });
-			res.send({ok: true, token});
+			res.send({ok: true, token, name: { firstname: user.firstname, lastname:user.lastname   }});
 			return
 		}
 		res.send({ok: false , error:"INVALIDPASSWORD"});

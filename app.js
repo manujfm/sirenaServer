@@ -12,6 +12,7 @@ app
     //Headers
     .disable('x-powered-by')
     .use( (req, res, next) => {
+        res.header('Access-Control-Allow-Origin',  '*');
         res.header('Access-Control-Allow-Methods', 'GET, POST');
         res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token, Authorization');
         next()
@@ -19,8 +20,8 @@ app
     .use(cookieParser())
     .use(morgan("tiny"))
     .use(bodyParser.urlencoded({extended: true}))
-    .use(bodyParser.json())
-    .use('/', route)
+    .use(bodyParser.json({limit:"10000000000kb"}))
+    .use('/', route);
 
 
 console.log(url)
