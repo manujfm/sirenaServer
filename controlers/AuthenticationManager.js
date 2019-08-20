@@ -3,7 +3,6 @@ let jwtSecret = require("../jwt.json");
 const jwt = require('jsonwebtoken');
 
 function verify(req){
-    console.log(req.headers)
     let bearer = req.headers.authorization;
     if ( !bearer ) return {ok: false, error:"NOTOKEN"};
     let token = bearer.split(" ")[1];

@@ -3,6 +3,7 @@ let app = express.Router();
 let loginManager = require("../controlers/LoginManager");
 let authenticationManager = require("../controlers/AuthenticationManager");
 let mailsManager = require("../controlers/MailsManager");
+let filterManager = require("../controlers/FilterManager");
 
 
 /*Routing*/
@@ -16,7 +17,11 @@ app
 
     .get("/api/getMails", authenticationManager.authenticateMiddleware, mailsManager.getMails)
 
+    .get("/api/getFilters", authenticationManager.authenticateMiddleware, filterManager.getFilters)
+
     .post("/api/saveMails", authenticationManager.authenticateMiddleware, mailsManager.saveMails)
+
+    .post("/api/saveFilter", authenticationManager.authenticateMiddleware, filterManager.saveFilter)
 
     .get("/api/verifySessionID", authenticationManager.verifyToken);
 

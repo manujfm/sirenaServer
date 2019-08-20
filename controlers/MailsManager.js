@@ -1,7 +1,4 @@
 const Mail = require('../models/Mail');
-
-
-
 let MailsManager = () => {};
 
 

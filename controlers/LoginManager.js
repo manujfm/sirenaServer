@@ -22,9 +22,15 @@ loginManager.login = async (req, res, next) => {
 	if ( user && user.length > 0 ){
 		user = user[0];
 		let resBcryp = await bcrypt.compare(req.body.password, user.password);
-		if ( resBcryp ){
-			let token = jwt.sign({user: req.body.user}, jwtSecret.secret, { expiresIn: jwtSecret.expires });
-			res.send({ok: true, token, name: { firstname: user.firstname, lastname:user.lastname   }});
+		if ( resBcryp ) {
+			const token = jwt.sign({user: req.body.user}, jwtSecret.secret, {expiresIn: jwtSecret.expires});
+			const userInfo = {
+				id: user.id,
+				firstname: user.firstname,
+				lastname: user.lastname,
+				username: user.username
+			};
+			res.send({ok: true, token, userInfo});
 			return
 		}
 		res.send({ok: false , error:"INVALIDPASSWORD"});
