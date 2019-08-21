@@ -11,20 +11,21 @@ const url = `${dbInfo.host}:${dbInfo.port}/${dbInfo.database}`;
 app
     //Headers
     .disable('x-powered-by')
-    .use( (req, res, next) => {
+    .use( (req, res, next) => { //Seteo de Headers
         res.header('Access-Control-Allow-Origin',  '*');
         res.header('Access-Control-Allow-Methods', 'GET, POST');
         res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token, Authorization');
         next()
     })
     .use(cookieParser())
-    .use(morgan("tiny"))
+    .use(morgan("tiny")) //Logeo de peticiones
+    //Parser del body
     .use(bodyParser.urlencoded({extended: true}))
     .use(bodyParser.json({limit:"10000000000kb"}))
     .use('/', route);
 
-
 console.log(url)
+//Conexion con mongo
 mongoose.connect(url, {useNewUrlParser: true}).then(() => {
     console.info("Database connection stablished");
     app.listen(port, () => {
