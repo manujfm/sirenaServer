@@ -17,7 +17,7 @@ app
 
     .get("/api/getMails", authenticationManager.authenticateMiddleware, mailsManager.getMails)
 
-    .get("/api/getFilters", authenticationManager.authenticateMiddleware, filterManager.getFilters)
+    .post("/api/getFilters", authenticationManager.authenticateMiddleware, filterManager.getFilters)
 
     .post("/api/saveMails", authenticationManager.authenticateMiddleware, mailsManager.saveMails)
 

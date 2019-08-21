@@ -17,7 +17,8 @@ FilterManager.saveFilter = async function(req, res){
 };
 
 FilterManager.getFilters =  async function(req, res){
-    let filters = await Filter.find({}).exec();
+    let userid = req.body.userid;
+    let filters = await Filter.find({userid}).exec();
     res.send(filters)
 };
 
