@@ -6,7 +6,8 @@ const mailSchema = new Schema({
 	lastName: String,
 	subject : String,
 	message: String,
-	mailId: Number
+	mailId: Number,
+	type: Number
 })
 
 module.exports = mongoose.model("Mail", mailSchema);

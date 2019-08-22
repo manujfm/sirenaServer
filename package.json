@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint *"
+    "lintlog": "eslint /**/*.js --ignore-pattern node_modules/ > lint_log.txt ",
+    "lintfix": "eslint --fix ./**/*"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "eslint": "^6.2.1",
+    "eslint-config-google": "^0.13.0",
     "eslint-config-standard": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",

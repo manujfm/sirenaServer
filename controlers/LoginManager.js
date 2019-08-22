@@ -73,7 +73,7 @@ loginManager.genHashPassword = async (req, res, next) => {
  * @return res {Object} response de la peticion
  **/
 loginManager.createLoginUser = async (req, res, next) => {
-	let user = await getUser(req.body.user);
+	let user = await getUser(req.body.username);
 	if ( user && user.length === 0 ){ //Verifica que no exista
 		let hash = await bcrypt.hash(req.body.password , 10); //haseha la contraseña
 		let user  = await createUser(req.body);
